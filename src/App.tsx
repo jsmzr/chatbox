@@ -283,8 +283,14 @@ function Main() {
 
     const generate = async (session: Session, promptMsgs: Message[], targetMsg: Message) => {
         messageScrollRef.current = { msgId: targetMsg.id, smooth: false }
+        let apiKey = store.settings.openaiKey
+        // 当对话的模型使用 gpt-4 时，更换 api key
+        if (session.settings && session.settings.model.startsWith('gpt-4')) {
+            apiKey = store.settings.gpt4key
+        }
+
         await llm.chat(
-            store.settings.openaiKey,
+            apiKey,
             store.settings.apiHost,
             store.settings.maxContextSize,
             store.settings.maxTokens,
@@ -565,6 +571,17 @@ function Main() {
                                     style={{ cursor: 'pointer' }}
                                 >
                                     {store.currentSession.name}
+                                    <span style={{
+                                        marginLeft: '8px', 
+                                        border: '1px solid rgba(237, 108, 2, 0.7)', 
+                                        borderRadius: '16px', 
+                                        color: 'rgb(237, 108, 2)',
+                                        height: '24px',
+                                        fontSize: 'small',
+                                        padding: '2px'
+                                        }}>
+                                        {store.currentSession.settings?.model || 'gpt-3.5-turbo'}
+                                    </span>
                                 </span>
                             </Typography>
                             <SponsorChip sessionId={store.currentSession.id} />

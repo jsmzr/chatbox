@@ -34,7 +34,8 @@ import PlaylistAddCheckCircleIcon from '@mui/icons-material/PlaylistAddCheckCirc
 import LightbulbCircleIcon from '@mui/icons-material/LightbulbCircle'
 
 const { useEffect } = React
-const models: string[] = ['gpt-3.5-turbo', 'gpt-3.5-turbo-0301', 'gpt-4', 'gpt-4-0314', 'gpt-4-32k', 'gpt-4-32k-0314']
+const models: string[] = ['gpt-3.5-turbo', 'gpt-3.5-turbo-1106', 'gpt-3.5-burbo-16k',
+    'gpt-4', 'gpt-4-0314', 'gpt-4-32k', 'gpt-4-32k-0314', 'gpt-4-1106-preview', 'gpt-4-0613', 'gpr-4-vision-preview']
 const languages: string[] = ['en', 'zh-Hans', 'zh-Hant', 'jp']
 const languageMap: { [key: string]: string } = {
     en: 'English',
@@ -136,6 +137,16 @@ export default function SettingDialog(props: Props) {
                     variant="outlined"
                     value={settingsEdit.openaiKey}
                     onChange={(e) => setSettingsEdit({ ...settingsEdit, openaiKey: e.target.value.trim() })}
+                />
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    label="OpenAI gpt-4 API Key"
+                    type="password"
+                    fullWidth
+                    variant="outlined"
+                    value={settingsEdit.gpt4key}
+                    onChange={(e) => setSettingsEdit({ ...settingsEdit, gpt4key: e.target.value.trim() })}
                 />
                 <FormControl fullWidth variant="outlined" margin="dense">
                     <InputLabel htmlFor="language-select">{t('language')}</InputLabel>

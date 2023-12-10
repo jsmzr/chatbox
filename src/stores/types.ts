@@ -8,11 +8,18 @@ export type Message = OpenAIMessage & {
     model?: string
 }
 
+export interface SessionSettings {
+    model: string
+    maxContextSize: string
+    temperature: number
+    maxTokens: string
+}
 export interface Session {
     id: string
     name: string
     messages: Message[]
     starred?: boolean
+    settings?: SessionSettings
 }
 
 export function createMessage(role: OpenAIRoleEnumType = OpenAIRoleEnum.User, content = ''): Message {
@@ -28,18 +35,19 @@ export function createSession(name = 'Untitled'): Session {
         id: uuidv4(),
         name: name,
         messages: [
-            {
-                id: uuidv4(),
-                role: 'system',
-                content:
-                    'You are a helpful assistant. You can help me by answering my questions. You can also ask me questions.',
-            },
-        ],
+            // {
+            //     id: uuidv4(),
+            //     role: 'system',
+            //     content:
+            //         'You are a helpful assistant. You can help me by answering my questions. You can also ask me questions.',
+            // },
+        ]
     }
 }
 
 export interface Settings {
     openaiKey: string
+    gpt4key: string
     apiHost: string
     model: string
     maxContextSize: string
