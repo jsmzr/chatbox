@@ -742,6 +742,7 @@ function Main() {
                     <ChatConfigDialog
                         open={configureChatConfig !== null}
                         session={configureChatConfig}
+                        settings={store.settings}
                         save={(session) => {
                             store.updateChatSession(session)
                             setConfigureChatConfig(null)
