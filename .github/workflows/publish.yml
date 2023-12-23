@@ -56,7 +56,9 @@ jobs:
                   key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
 
             - name: install frontend dependencies
-              run: yarn install # change this to npm or pnpm depending on which one you use
+              run: |
+                  yarn add https://github.com/tauri-apps/tauri-plugin-store#v1
+                  yarn install # change this to npm or pnpm depending on which one you use
 
             - name: Change Version
               env:
